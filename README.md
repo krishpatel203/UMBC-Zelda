@@ -171,7 +171,7 @@ The project specification emphasizes incremental compilation and testing, includ
 For Linux environments with Valgrind installed, memory diagnostics can be performed using:
 
 ```bash
-valgrind --leak-check=full ./proj4 proj4_map1.txt
+valgrind ./proj4 proj4_map1.txt
 ```
 
 These commands describe the intended testing workflow and do not constitute a claim that all tests have passed.
