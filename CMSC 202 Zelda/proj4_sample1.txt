@@ -1,0 +1,469 @@
+Loading file: proj4_map1.txt
+
+Welcome to Zelda!
+Hero Name:
+Link
+You start with a sword!
+
+Rocky Area
+You are standing on a rocky outcropping surrounded by lava. The heat is oppressive. The only exit appears to be to an area to the east.
+Possible Exits: E
+It is peaceful here.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+2
+Which direction? (N E S W)
+s
+Which direction? (N E S W)
+w
+Which direction? (N E S W)
+e
+
+Lava Area
+The rocks are warm to the touch which makes sense as you are standing on a slightly elevated area surrounded by lava. There is an area back to the west.
+Possible Exits: W
+A PeaHat flutters through the air.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+3
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 4 points of damage!
+Peahat attacks!
+Link Health: 7
+Peahat: Health: 10: Damage: 1
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 3 points of damage!
+Peahat attacks!
+Link Health: 6
+Peahat: Health: 7: Damage: 1
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 2 points of damage!
+Peahat attacks!
+Link Health: 5
+Peahat: Health: 5: Damage: 1
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 4 points of damage!
+Peahat attacks!
+Link Health: 4
+Peahat: Health: 1: Damage: 1
+1. Normal Attack
+2. Special Attack
+1
+You attack and do 3 to the enemy.
+Peahat attacks!
+You have defeated the Peahat.
+You have earned 2 rupees.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+1
+
+Lava Area
+The rocks are warm to the touch which makes sense as you are standing on a slightly elevated area surrounded by lava. There is an area back to the west.
+Possible Exits: W
+It is peaceful here.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+4
+You don't have enough money to improve your weapon.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+5
+Name: Link
+HP: 8
+Rupees: 2
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+2
+Which direction? (N E S W)
+w
+
+Rocky Area
+You are standing on a rocky outcropping surrounded by lava. The heat is oppressive. The only exit appears to be to an area to the east.
+Possible Exits: E
+A PeaHat flutters through the air.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+3
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 3 points of damage!
+Peahat attacks!
+Link Health: 7
+Peahat: Health: 11: Damage: 1
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 3 points of damage!
+Peahat attacks!
+Link Health: 6
+Peahat: Health: 8: Damage: 1
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 3 points of damage!
+Peahat attacks!
+Link Health: 5
+Peahat: Health: 5: Damage: 1
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 4 points of damage!
+A Peahat whips at you ferociously!
+You take 3 points of damage
+Link Health: 2
+Peahat: Health: 1: Damage: 1
+1. Normal Attack
+2. Special Attack
+1
+You attack and do 3 to the enemy.
+Peahat attacks!
+You have defeated the Peahat.
+You have earned 2 rupees.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+4
+How much would you like to improve your weapon? (max 1).
+1
+You have improved your weapon by 1 damage.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+5
+Name: Link
+HP: 8
+Rupees: 1
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+2
+Which direction? (N E S W)
+w
+Which direction? (N E S W)
+e
+
+Lava Area
+The rocks are warm to the touch which makes sense as you are standing on a slightly elevated area surrounded by lava. There is an area back to the west.
+Possible Exits: W
+It is peaceful here.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+2
+Which direction? (N E S W)
+w
+
+Rocky Area
+You are standing on a rocky outcropping surrounded by lava. The heat is oppressive. The only exit appears to be to an area to the east.
+Possible Exits: E
+A PeaHat flutters through the air.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+3
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 2 points of damage!
+Peahat attacks!
+Link Health: 7
+Peahat: Health: 12: Damage: 1
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 5 points of damage!
+Peahat attacks!
+Link Health: 6
+Peahat: Health: 7: Damage: 1
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 6 points of damage!
+Peahat attacks!
+Link Health: 5
+Peahat: Health: 1: Damage: 1
+1. Normal Attack
+2. Special Attack
+1
+You attack and do 4 to the enemy.
+Peahat attacks!
+You have defeated the Peahat.
+You have earned 2 rupees.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+3
+There is nothing to attack here.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+4
+How much would you like to improve your weapon? (max 1).
+1
+You have improved your weapon by 1 damage.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+5
+Name: Link
+HP: 8
+Rupees: 0
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+2
+Which direction? (N E S W)
+e
+
+Lava Area
+The rocks are warm to the touch which makes sense as you are standing on a slightly elevated area surrounded by lava. There is an area back to the west.
+Possible Exits: W
+A PeaHat flutters through the air.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+3
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 6 points of damage!
+A Peahat whips at you ferociously!
+You take 3 points of damage
+Link Health: 5
+Peahat: Health: 8: Damage: 1
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 5 points of damage!
+A Peahat whips at you ferociously!
+You take 3 points of damage
+Link Health: 2
+Peahat: Health: 3: Damage: 1
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 7 points of damage!
+Peahat attacks!
+You have defeated the Peahat.
+You have earned 2 rupees.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+2
+Which direction? (N E S W)
+n
+Which direction? (N E S W)
+w
+
+Rocky Area
+You are standing on a rocky outcropping surrounded by lava. The heat is oppressive. The only exit appears to be to an area to the east.
+Possible Exits: E
+It is peaceful here.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+2
+Which direction? (N E S W)
+e
+
+Lava Area
+The rocks are warm to the touch which makes sense as you are standing on a slightly elevated area surrounded by lava. There is an area back to the west.
+Possible Exits: W
+A statue stands here.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+3
+1. Normal Attack
+2. Special Attack
+2
+You slash twice with your sword!
+You do 9 points of damage!
+Armos attacks!
+Link Health: 5
+Armos: Health: 1: Damage: 3
+1. Normal Attack
+2. Special Attack
+1
+You attack and do 5 to the enemy.
+Armos attacks!
+You have defeated the Armos.
+You have earned 2 rupees.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+4
+How much would you like to improve your weapon? (max 1).
+1
+You have improved your weapon by 1 damage.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+2
+Which direction? (N E S W)
+w
+
+Rocky Area
+You are standing on a rocky outcropping surrounded by lava. The heat is oppressive. The only exit appears to be to an area to the east.
+Possible Exits: E
+A bulldog looking Moblin stands here.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+3
+1. Normal Attack
+2. Special Attack
+1
+You attack and do 6 to the enemy.
+Moblin attacks!
+Link Health: 6
+Moblin: Health: 6: Damage: 2
+1. Normal Attack
+2. Special Attack
+1
+You attack and do 6 to the enemy.
+Moblin attacks!
+You have defeated the Moblin.
+You have earned 2 rupees.
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+5
+Name: Link
+HP: 8
+Rupees: 3
+What would you like to do?
+1. Look
+2. Move
+3. Attack Enemy
+4. Improve Weapon
+5. Check Stats
+6. Quit
+6
+Good bye!

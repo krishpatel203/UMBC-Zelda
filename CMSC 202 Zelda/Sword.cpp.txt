@@ -1,0 +1,23 @@
+#include "Sword.h"
+// Name: Sword(int damage)                                                                                                                                                                                
+  // Description: Creates a new Sword                                                                                                                                                                       
+  // Preconditions: None                                                                                                                                                                                    
+  // Postconditions: Can create a Sword
+Sword::Sword(int damage) : Weapon(damage) {
+    // The Sword constructor should initialize the damage using the base class constructor
+}
+// Name: SpecialAttack                                                                                                                                                                                    
+  // Description: Defines the Sword's special attack                                                                                                                                                        
+  // Preconditions: None                                                                                                                                                                                    
+  // Postconditions: Returns damage from special attack
+
+int Sword::SpecialAttack() {
+  // Calculate special attack damage
+  int dam =  (rand() % GetDamage() + 1) * 2;
+
+  //Special Damage Message
+  cout << "You slash twice with a sword" << endl;
+
+  //return dam
+  return dam;
+}

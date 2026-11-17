@@ -1,0 +1,620 @@
+#include "Game.h"
+
+// Name: Game(string filename) - Overloaded Constructor                                                                                                                                                   
+  // Description: Creates a new Game                                                                                                                                                                        
+  // Preconditions: None                                                                                                                                                                                    
+  // Postconditions: Initializes all game variables to defaults (constants)                                                                                                                                 
+  // including m_myHero (null), m_curEnemy (null), filename (passed value),                                                                                                                                 
+  // and starting area (START_AREA)
+Game::Game(string filename) {
+    // Set the hero to null
+    m_myHero = nullptr;
+
+    // Set the enemy to null
+    m_curEnemy = nullptr;
+
+    // Assign the passed filename
+    m_filename = filename;
+
+    // Set the current area to the starting area    
+    m_curArea = START_AREA; 
+}
+// Name: ~Game                                                                                                                                                                                            
+  // Description: Destructor                                                                                                                                                                                
+  // Preconditions: None                                                                                                                                                                                    
+  // Postconditions: Deallocates anything dynamically allocated                                                                                                                                             
+  //                 in Game (weapons, enemies, and map)
+Game::~Game() {
+    // Deallocate dynamically allocated objects
+    if (m_myHero != nullptr) {
+      // Delete the hero object
+        delete m_myHero;
+
+	//hero to null
+        m_myHero = nullptr;
+    }
+
+    if (m_curEnemy != nullptr) {
+      // Delete the enemy object
+        delete m_curEnemy;
+
+	//enemy to null
+        m_curEnemy = nullptr;
+    }
+
+    // Deallocate area objects in the m_myMap vector
+    for (Area* area : m_myMap) {
+      // Delete the area object
+        delete area;
+    }
+
+    // Clear the vector after deallocating the areas
+    m_myMap.clear();
+}
+// Name: LoadMap()                                                                                                                                                                                        
+  // Description: Dynamically creates areas and inserts them into                                                                                                                                           
+  //              the m_myMap vector                                                                                                                                                                        
+  // Note: the size of the map is not known - you should not use constants                                                                                                                                  
+  //       Also, you can use stoi to convert strings to integers                                                                                                                                            
+  // Precondition: m_filename is populated                                                                                                                                                                  
+  // Postcondition: Map is populated with area objects.  
+void Game::LoadMap() {
+
+   // Open the input file
+  ifstream inputFile(m_filename);
+
+  //if statement if the file does not open
+    if (!inputFile.is_open()) {
+      //error message
+        cout << "Error: Unable to open the input file." << endl;
+
+	//return
+        return;
+    }
+
+    //string
+    string line;
+
+    //while loop
+    while (getline(inputFile, line)) {
+      //if loop
+        if (!line.empty()) {
+            vector<string> tok;
+	    
+            size_t pos = 0;
+
+	    //while loop
+            while ((pos = line.find(DELIMITER)) != string::npos) {
+	      
+                tok.push_back(line.substr(0, pos));
+		
+                line.erase(0, pos + 1);
+            }
+            tok.push_back(line); // Add the last token
+
+            if (tok.size() >= 7) {
+                // Extract area data from tokens
+                int id = stoi(tok[0]);
+		
+                string name = tok[1];
+		
+                string desc = tok[2];
+		
+                int north = stoi(tok[3]);
+		
+                int east = stoi(tok[4]);
+		
+                int south = stoi(tok[5]);
+		
+                int west = stoi(tok[6]);
+
+                // Create an Area object and initialize it with the extracted data
+                Area* area = new Area(id, name, desc, north, east, south, west);
+
+                // Add the Area object to the m_myMap vector
+                m_myMap.push_back(area);
+            }
+        }
+    }
+
+    //close file
+    inputFile.close();
+  
+}
+// Name: HeroCreation()                                                                                                                                                                                   
+  // Description: Populates m_myHero and asks name                                                                                                                                                          
+  // Preconditions: None                                                                                                                                                                                    
+  // Postconditions: m_myHero is populated (and m_name in m_myHero)   
+void Game::HeroCreation() {
+    //string 
+    string heroName;
+
+    // Display a welcome message
+    cout << "Welcome to Zelda!"<< endl;
+
+    // Prompt the user to input
+    cout << "Hero's Name: ";
+    cin >> heroName;
+
+    // Create a Hero object with the given name and starting health
+    m_myHero = new Hero(heroName, HERO_HEALTH);  
+}
+// Name: Look()                                                                                                                                                                                           
+  // Description: Displays the current area's description and                                                                                                                                               
+  //              the current enemy's desc (if there is one) otherwise, says                                                                                                                                
+  //              "It is peaceful here."                                                                                                                                                                    
+  // Preconditions: None                                                                                                                                                                                    
+  // Postconditions: None                                                                                                                                                                                 
+void Game::Look() {
+    // Check if m_myHero is in a valid area
+    if (m_curArea >= 0 && m_curArea < m_myMap.size()) {
+        // Get the current area from m_myMap
+        Area* currentArea = m_myMap[m_curArea];
+
+        // Display the current area's description
+        cout << currentArea->GetName() << endl;
+        cout << currentArea->GetDesc() << endl;
+
+        // Check if there is a current enemy in the area
+        if (m_curEnemy != nullptr) {
+	  //enemy description
+            cout << m_curEnemy->GetDesc() << endl;
+        }
+
+	//else
+	else {
+	  //Its is peacful here
+            cout << "It is peaceful here." << endl;
+        }
+    }
+
+    //else
+    else {
+      //Invalid current area
+        cout << "Invalid current area." << endl;
+    }
+}
+ // Name: StartGame()                                                                                                                                                                                      
+  // Description: Welcomes the player to the game. Calls LoadMap, HeroCreation,                                                                                                                             
+  //              Randomizes an enemy, Look, and Action                                                                                                                                                     
+  // Preconditions: Input file must exist                                                                                                                                                                   
+  // Postconditions: Map is loaded, User has chosen a hero to play with,                                                                                                                                    
+  //                 prints the starting area, chooses a random enemy                                                                                                                                       
+  //
+void Game::StartGame() {
+
+    // Create the hero and ask for the hero's name
+    HeroCreation();
+
+    // Load the map from the input file                                                                                                                                                                     
+    LoadMap();
+
+    // Choose a random enemy to populate m_curEnemy
+    RandomEnemy();
+
+    // Display the initial area information
+    Look();
+
+    // Start the game by calling the Action function
+    Action();
+}
+// Name: Action()                                                                                                                                                                                         
+  // Description: Menu for game. Displays menu.                                                                                                                                                             
+  //              Player can look, move, attack, improve weapon, stats, or quit                                                                                                                             
+  //              Can only attack if there is actually a enemy in this area                                                                                                                                 
+  // Preconditions: Everything in start has been completed                                                                                                                                                  
+  // Postconditions: Game continues until quit or player dies        
+void Game::Action() {
+  //control the game loop
+    bool quit = false;
+
+    //while loop
+    while (!quit) {
+      // Display the menu options
+        cout << "What would you like to do" << endl;
+	
+        cout << "1. Look" << endl;
+	
+        cout << "2. Move" << endl;
+	
+        cout << "3. Attack Enemy" << endl;
+	
+        cout << "4. Improve Weapon" << endl;
+	
+        cout << "5. Check Stats" << endl;
+	
+        cout << "6. Quit" << endl;
+
+	//int choice
+        int choice;
+        cin >> choice;
+
+	//switch choice
+        switch (choice) {
+	  //case 1
+            case 1:
+	        //look
+                Look();
+		
+                break;
+		
+	     //case 2
+            case 2:
+	        //Move
+                Move();
+		
+                break;
+
+	     //case 3
+            case 3:
+	        //Attack
+                Attack();
+
+		//break
+                break;
+
+	     //case 4:	
+            case 4:
+	        //ImproveWeapon
+                ImproveWeapon();
+
+		//break
+                break;
+
+	    //case 5	
+            case 5:
+	        //Stats
+                Stats();
+
+		//break
+                break;
+
+	     //case 6	
+            case 6:
+	      //Goodbye
+	        cout << "Goodbye!" << endl;
+
+		//return
+                return;
+
+	     //default
+            default:
+                break;
+        }
+    }
+}
+// Name: RandomEnemy()                                                                                                                                                                                    
+  // Description: Used to dynamically allocated a random enemy                                                                                                                                              
+  //              (25% chance of nothing, 25% chance of Armos, 25% of Moblin, and                                                                                                                           
+  //               25% of Peahat.)                                                                                                                                                                          
+  // Preconditions: None                                                                                                                                                                                    
+  // Postconditions: Populates m_curEnemy (sets to nullptr if nothing)     
+void Game::RandomEnemy() {
+  // Generate a random number
+   int random = rand() % 4;
+
+    // Determine the type of enemy based on the random number
+    switch (random) {
+        case 0:
+            // 25% chance of having no enemy
+            m_curEnemy = nullptr;
+
+	    //break
+            break;
+        case 1:
+            // 25% chance of having an Armos
+            m_curEnemy = new Armos(ARMOS_NAME, ARMOS_HEALTH, ARMOS_DAMAGE, ARMOS_DESC);
+
+	    //break
+            break;
+        case 2:
+            // 25% chance of having a Moblin
+            m_curEnemy = new Moblin(MOBLIN_NAME, MOBLIN_HEALTH, MOBLIN_DAMAGE, MOBLIN_DESC);
+
+	    //break
+            break;
+        case 3:
+            // 25% chance of having a Peahat
+            m_curEnemy = new Peahat(PEAHAT_NAME, PEAHAT_HEALTH, PEAHAT_DAMAGE, PEAHAT_DESC);
+
+	    //break
+            break;
+        default:
+            break;
+    }
+}
+// Name: ImproveWeapon                                                                                                                                                                                    
+  // Description: Allows user to improve their weapon                                                                                                                                                       
+  // Preconditions: For each COST_IMPROVEMENT, damage in the weapon increases                                                                                                                               
+  //                by one.                                                                                                                                                                                 
+  // Postconditions: m_curHero's weapon is improved
+void Game::ImproveWeapon() {
+  //if statement
+    if (m_myHero != nullptr) {
+      // Calculate the number of improvement 
+        int rupeesNeeded = (m_myHero->GetRupee() / COST_IMPROVEMENT);
+
+	//if statment
+        if (rupeesNeeded > 0) {
+	    // Improve the hero's weapon 
+            m_myHero->ImproveWeapon(rupeesNeeded);
+
+	    //Weapon improved by 
+            cout << "Weapon improved by " << rupeesNeeded << " levels. New damage: " << m_myHero->Attack() << endl;
+        } else {
+	  //else statment if you do not have enough ruppees
+            cout << "You don't have enough rupees to improve your weapon." << endl;
+        }
+    } else {
+      //else state if no hero game in the game
+        cout << "No hero found in the game." << endl;
+    }
+}
+ // Name: Move                                                                                                                                                                                             
+  // Description: Asks a player which direction they would like to move.                                                                                                                                    
+  //              Moves player from one area to another (updates m_curArea)                                                                                                                                 
+  //              Once successfully moved, chooses a new random enemy and                                                                                                                                   
+  //              Calls Look                                                                                                                                                                                
+  // Preconditions: Must be valid move (area must exist)                                                                                                                                                    
+  // Postconditions: Displays area information and new monster
+void Game::Move() {
+   if (m_myHero) {
+        // Display available directions to the player
+        cout << "Which direction? (N E S W)" << endl;
+
+	//char choice
+        char choice;
+
+	//Enter choice
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        // Check if the choice is valid (compare with lowercase characters)
+        if (choice != 'n' && choice != 'e' && choice != 's' && choice != 'w') {
+	    //invalid choice
+            cout << "Invalid choice. Please enter N, E, S, or W." << endl;
+
+	    //return
+            return;
+        }
+
+        // Calculate the new area based on the chosen direction
+        int newArea = m_curArea;
+
+	//switch statement
+        switch (choice) {
+            case 'n':
+	      //new area
+                newArea -= 1;
+
+		//break
+                break;
+            case 'e':
+	      //newArea
+                newArea += 1;
+
+		//break
+                break;
+            case 's':
+                newArea += 10;  // Assuming 10 areas per row
+
+		//break
+                break;
+            case 'w':
+	      //new area for west
+                newArea -= 1;
+
+		//break
+                break;
+        }
+
+        // Check if the new area is valid
+        if (newArea >= 0 && newArea < m_myMap.size()) {
+            m_curArea = newArea;
+
+            // Choose a new random enemy for the current area
+            RandomEnemy();
+
+            // Display the area information and the new enemy
+            Look();
+        } else {
+	  //you can't move in that direction
+            cout << "You can't move in that direction. Choose another direction." << endl;
+        }
+    } else {
+        //no hero found
+        cout << "No hero found. Please create a hero first." << endl;
+    }
+}
+// Name: Attack                                                                                                                                                                                           
+  // Description: Allows player to attack an enemy.                                                                                                                                                         
+  // Preconditions: Must have enemy Enemy in current area                                                                                                                                                   
+  // Postconditions: Checks to make sure that there is an enemy to fight.                                                                                                                                   
+  //                 Asks the user if they want to use a normal or special attack                                                                                                                           
+  //                 Updates health(hp) as battle continues.                                                                                                                                                
+  //                 Both Hero and Enemy attack every round until                                                                                                                                           
+  //                 one or more has <= 0 health                                                                                                                                                            
+  //                 May need to deallocate enemy Enemy to prevent memory leaks.                                                                                                                            
+  //                 When either Enemy or Hero <= 0 health, calls ProcessBattle
+void Game::Attack(){
+if (m_myHero && m_curEnemy) {
+        //get hero health
+        int heroHealth = m_myHero->GetHealth();
+
+	//get enemy health
+        int enemyHealth = m_curEnemy->GetHealth();
+
+	//while loop
+        while (heroHealth > 0 && enemyHealth > 0) {
+	  //Normal Attack and Special Attack
+	   cout << "1. Normal Attack\n" << "2. Special Attack\n";
+
+	    //int choice
+	    int choice;
+            cin >> choice;
+
+	    //if statement if choice is less than 1 and greater than 3
+	    if(choice < 1||choice > 3){
+	      //Normal Attack
+	      cout << "1. Normal Attack" << endl;
+
+	      //Special Attack
+	      cout << "2. Special Attack" << endl;
+	      cin >> choice;
+
+	      //continue
+	      continue;
+	    }
+
+	    //int heroDamage
+            int heroDamage = 0;
+
+	    //int enenmyDamage
+	    int enemyDamage = 0;
+
+	    //if choice == 1
+            if (choice == 1) {
+	        //hero attack
+                heroDamage = m_myHero->Attack();
+            } else if (choice == 2) {
+	        //hero special attack
+                heroDamage = m_myHero->SpecialAttack();
+
+		// enemy attack
+		enemyDamage = m_curEnemy->Attack(); 
+            }
+
+	    //enemy attack
+	    enemyDamage = m_curEnemy->Attack();
+
+	    //heroHealth and enemyDamage
+            heroHealth -= enemyDamage;
+
+	    //enemyHealth and heroDamage
+            enemyHealth -= heroDamage;
+	    
+	    //if choice ==1
+	    if(choice == 1){
+	      //the amount of damage done  to enemy
+	      cout << "You attack and do " << heroDamage << " to the enemy." << endl;
+	    }
+
+	    //if choice ==2
+	    if(choice == 2){
+	       //the amount of damage to enemy
+	       cout << "You do " << heroDamage << " points of damage." << endl;
+
+	       //enemy special attack 
+	      enemyDamage = m_curEnemy->SpecialAttack();
+	    }
+
+	    //enemy attacks
+	    cout << m_curEnemy->GetName() << " attacks!" << endl;
+
+	    //hero health
+            cout << m_myHero->GetName() << " Health: " << heroHealth << endl;
+
+	    //enemy health and damage
+            cout << m_curEnemy->GetName() << ": Health: " << enemyHealth << ": Damage: " << enemyDamage << endl;
+
+	    //if hero health  <=0 you have defeated
+            if (heroHealth <= 0) {
+	        //you have been defeated. Try Again!
+                cout << "You have been defeated. Try Again!." << endl;
+
+		//Please play again
+		cout << "Please play again!" << endl;
+
+		//exit
+                exit(0);
+            }
+
+	    else if (enemyHealth <= 0) {
+	        //you have defeated the enemy
+                cout << "You have defeated the " << m_curEnemy->GetName() << "." << endl;
+
+		//earned rupees when defeating enemy
+                int earnedRupees = RUPEES_WIN;
+
+		//set rupee 
+                m_myHero->SetRupee(earnedRupees);
+
+		//You have earnedn rupee from defeating enemy
+                cout << "You have earned " << earnedRupees << " rupees." << endl;
+                break;
+            }
+
+	    //else if statement
+	    else if(heroHealth <= 0 && enemyHealth <=0){
+	      //Mutual destruction! Both the hero and the enemy are defeated
+	      cout << "Mutual destruction! Both the hero and the enemy are defeated." << endl;
+	    }
+	    
+        }
+	
+	/*
+        bool heroWins = (heroHealth > 0);
+	ProcessBattle(enemyHealth <= 0, heroWins);
+	*/
+    }else {
+        cout << "No hero or enemy found. Please create a hero and ensure there is an enemy in this area." << endl;
+    }
+}
+// Name: Stats()                                                                                                                                                                                          
+  // Description: Displays the information about the hero (name, health, rupees)                                                                                                                            
+  // Preconditions: None                                                                                                                                                                                    
+  // Postconditions: None
+void Game::Stats() {
+    //if statement
+    if (m_myHero) {
+        // Get hero name
+        string heroName = m_myHero->GetName();
+
+	//get hero health
+        int heroHealth = m_myHero->GetHealth();
+
+	//get hero rupee
+        int heroRupees = m_myHero->GetRupee();
+
+        // Display hero name
+        cout << "Name: " << heroName << endl;
+
+	//Display Hero Health
+        cout << "HP: " <<  HERO_HEALTH << endl;
+
+	//Display Hero rupee earned from defeating the enemy
+        cout << "Rupees: " << heroRupees << endl;
+    } else {
+        //no hero found. Please create a hero before checking stats
+        cout << "No hero found. Please create a hero before checking stats." << endl;
+    }
+}
+// Name: ProcessBattle                                                                                                                                                                                    
+  // Description: Called when either the enemy or hero have no health left                                                                                                                                  
+  //       Displays who won (Enemy, Hero, mutual destruction)                                                                                                                                               
+  //       If hero wins, gives RUPEES_WIN and resets health to starting value                                                                                                                               
+  // Preconditions: Enemy or hero are <= 0 health                                                                                                                                                           
+  // Postconditions:
+void Game::ProcessBattle(bool enemyAlive, bool alive) {
+  //if statement
+   if (!enemyAlive && !alive) {
+     //mutual desctruction! Both the hero and the enmy are defeated
+        cout << "Mutual destruction! Both the hero and the enemy are defeated." << endl;
+     //else if
+    } else if (enemyAlive) {
+                //you have been defeated
+                cout << "You have been defeated. Try Again!." << endl;
+                cout << "Please play again!" << endl;
+                exit(0);
+   } else if(alive) {
+        // The hero wins
+        cout << "You have defeated the " << m_curEnemy->GetName() << "." << endl;
+        int earnedRupees = RUPEES_WIN;
+        if (m_myHero) {
+            m_myHero->SetRupee(m_myHero->GetRupee() + earnedRupees);
+            cout << "You have earned " << earnedRupees << " rupees." << endl;
+            // Reset the hero's health to the starting value
+            m_myHero->SetHealth(HERO_HEALTH);
+        }
+    }
+}

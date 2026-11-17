@@ -1,0 +1,23 @@
+#include "Boomerang.h"
+// Name: Boomerang(int damage)                                                                                                                                                                            
+  // Description: Creates a new Boomerang                                                                                                                                                                   
+  // Preconditions: None                                                                                                                                                                                    
+  // Postconditions: Can create a Boomerang
+Boomerang::Boomerang(int damage) : Weapon(damage) {
+    // The Boomerang constructor should call the base class (Weapon) constructor
+    // to initialize the damage value.
+}
+// Name: SpecialAttack                                                                                                                                                                                    
+  // Description: Defines the Boomerang's special attack                                                                                                                                                    
+  // Preconditions: None                                                                                                                                                                                    
+  // Postconditions: Returns damage from special attack
+int Boomerang::SpecialAttack() {
+    // The special attack returns damage between 1 and m_damage, doubled
+    int result = (rand() % GetDamage()) + 1;
+
+    //Special Damage Message
+    cout << "You throw a boomerang and it does " << result << " damage on the way out and " << result << " damage on the way back!" << endl;
+
+    //return result
+    return result * 2;
+}
