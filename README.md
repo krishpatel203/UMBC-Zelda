@@ -103,19 +103,6 @@ This design separates map data from gameplay logic and allows the application to
 - Terminal (Linux, macOS, or another compatible environment)
 - Project source files and map data files
 
-### Installation
-
-Clone the GitHub repository:
-
-```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-```
-
-Navigate to the project directory:
-
-```bash
-cd YOUR-REPOSITORY
-```
 
 ### Compile
 
